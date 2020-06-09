@@ -1,8 +1,8 @@
 package ar.com.educacionit.services.main;
 
 import ar.com.educacionit.domain.Producto;
-import ar.com.educacionit.services.ProductoDAO;
-import ar.com.educacionit.services.ProductoDAOJDBCImpl;
+import ar.com.educacionit.services.ProductoServices;
+import ar.com.educacionit.services.ProductoServicesImpl;
 
 public class MainConection {
 
@@ -10,11 +10,13 @@ public class MainConection {
 		
 		//interfaz i = new Clase()
 		
-		ProductoDAO pdao = new ProductoDAOJDBCImpl();
+		ProductoServices pdao = new ProductoServicesImpl();
 
-		Producto producto = pdao.getProducto();
+		Producto[] productos = pdao.findProductos();
 		
-		System.out.println(producto);
+		for(Producto producto : productos) {
+			System.out.println(producto);
+		}
 	}
 
 }
