@@ -3,6 +3,7 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  
   <!--  PARENT -->
   <parent>
     <groupId>ar.com.educacionit</groupId>
@@ -15,21 +16,4 @@
   <name>domain</name>
   <url>http://maven.apache.org</url>
   
-  <!-- PROPIEDADES -->
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  
-  <!-- DEPENDENCIAS -->
-  <dependencies>
-	<!-- MySQL JDBC driver -->
-	<!-- http://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-	<dependency>
-		<groupId>mysql</groupId>
-		<artifactId>mysql-connector-java</artifactId>
-		<version>8.0.18</version>
-	</dependency>    
-  </dependencies>
-  
-  <!-- MAS SECCIONES -->
 </project>
