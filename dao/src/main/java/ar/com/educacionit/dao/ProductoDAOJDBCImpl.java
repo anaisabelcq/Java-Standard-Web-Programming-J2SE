@@ -106,7 +106,16 @@ public class ProductoDAOJDBCImpl implements ProductoDAO {
 			
 			st = connection.createStatement();
 			
-			int rows = st.executeUpdate("INSERT INTO producto (DESRIPCION, PRECIO, CODIGO) VALUES('"+producto.getDescripcion()+"', "+producto.getPrecio()+", "+producto.getCodigo()+")");
+			st.executeUpdate("INSERT INTO producto (DESRIPCION, PRECIO, CODIGO) VALUES('"+producto.getDescripcion()+"', "+producto.getPrecio()+", "+producto.getCodigo()+")", Statement.RETURN_GENERATED_KEYS);
+			
+			ResultSet rs=st.getGeneratedKeys();
+			
+			int id;
+			
+			if(rs.next()){
+				id = rs.getInt(1);
+				producto.setId(new Long(id));
+			}
 			
 			connection.commit();
 			
