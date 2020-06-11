@@ -1,5 +1,7 @@
 package ar.com.educacionit.services.main;
 
+import java.util.Collection;
+
 import ar.com.educacionit.domain.Producto;
 import ar.com.educacionit.services.ProductoServices;
 import ar.com.educacionit.services.ProductoServicesImpl;
@@ -11,11 +13,11 @@ public class DeleteMain {
 		
 		ProductoServices service = new ProductoServicesImpl();
 
-		Producto[] productos = service.findProductos();
+		Collection<Producto> productos = service.findProductos();
 		
-		if(productos.length > 0) {
+		if(!productos.isEmpty()) {
 			
-			Producto p = productos[0];
+			Producto p = productos.iterator().next();
 			
 			service.eliminarProducto(p.getId());
 		}
