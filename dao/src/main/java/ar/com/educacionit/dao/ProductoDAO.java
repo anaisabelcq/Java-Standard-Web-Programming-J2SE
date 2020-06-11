@@ -1,12 +1,14 @@
 package ar.com.educacionit.dao;
 
+import java.util.Collection;
+
 import ar.com.educacionit.dao.exceptions.DuplicatedException;
 import ar.com.educacionit.dao.exceptions.GenericException;
 import ar.com.educacionit.domain.Producto;
 
 public interface ProductoDAO {
 
-	public Producto[] findProductos();
+	public Collection<Producto> findProductos() throws GenericException;
 	
 	/**
 	 * Elimina un producto,dado su PK

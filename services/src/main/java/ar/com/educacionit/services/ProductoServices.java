@@ -1,5 +1,7 @@
 package ar.com.educacionit.services;
 
+import java.util.Collection;
+
 import ar.com.educacionit.domain.Producto;
 import ar.com.educacionit.services.exceptions.ServiceException;
 
@@ -14,7 +16,7 @@ public interface ProductoServices {
 
 	public Producto obtenerProducto(Long id) throws ServiceException;
 
-	public Producto[] findProductos();
+	public Collection<Producto> findProductos() throws ServiceException;
 	
 	public void actualizarProducto(Producto aux) throws ServiceException;
 

@@ -1,5 +1,7 @@
 package ar.com.educacionit.services;
 
+import java.util.Collection;
+
 import ar.com.educacionit.dao.ProductoDAO;
 import ar.com.educacionit.dao.ProductoDAOJDBCImpl;
 import ar.com.educacionit.dao.exceptions.DuplicatedException;
@@ -18,9 +20,15 @@ public class ProductoServicesImpl implements ProductoServices {
 	}
 	
 	//alt+shift+s
-	public Producto[] findProductos() {
+	public Collection<Producto> findProductos() throws ServiceException {
 		//CTRL +SHIFT + O
-		return this.productoDao.findProductos();
+		try {
+			return this.productoDao.findProductos();
+		} catch (GenericException e) {
+			e.printStackTrace();
+			//CTRL + D
+			throw new ServiceException(e.getMessage(), e);
+		}
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import ar.com.educacionit.dao.exceptions.DuplicatedException;
 import ar.com.educacionit.dao.exceptions.GenericException;
@@ -13,28 +15,20 @@ import ar.com.educacionit.domain.jdbc.AdministradorDeConexiones;
 
 public class ProductoDAOJDBCImpl implements ProductoDAO {
 
-	public Producto[] findProductos() {
+	public Collection<Producto> findProductos() throws GenericException {
+
+		Collection<Producto> productos = new ArrayList<Producto>();
+		
 		try {
 			Connection conection = AdministradorDeConexiones.obtenerConexion();
 			
 			Statement st = conection.createStatement();
-			
-			ResultSet rs = st.executeQuery("SELECT count(*) FROM producto");
-			
-			Producto[] productos = null;
-			
-			if(rs.next()) {
-				Long size = rs.getLong(1);//cuantos son los productos
-				System.out.println("hay " + size + " productos");
-				productos = new Producto[size.intValue()];
-			}
-			
+						
 			//volver a consultar pero ahora todos los productos
-			rs = st.executeQuery("SELECT * FROM producto");
+			ResultSet rs = st.executeQuery("SELECT * FROM producto");
 			
 			Producto producto = null;
 			
-			int i = 0;
 			while(rs.next()) {
 				//obtener los datos desde el rs
 				Long id = rs.getLong(1);
@@ -43,14 +37,13 @@ public class ProductoDAOJDBCImpl implements ProductoDAO {
 				String codigo =  rs.getString(4);
 				
 				producto = new Producto(id, descripcion, precio, codigo);
-				productos[i] = producto;
-				i++;
+				productos.add(producto);
 			}
 			conection.close();
 			return productos;
 		} catch (Exception e) {			
 			e.printStackTrace();
-			return null;
+			throw new GenericException(e.getMessage());
 		}
 	}
 
