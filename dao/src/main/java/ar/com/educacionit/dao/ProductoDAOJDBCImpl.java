@@ -35,8 +35,10 @@ public class ProductoDAOJDBCImpl implements ProductoDAO {
 				String descripcion = rs.getString(2);
 				Float precio = rs.getFloat(3);
 				String codigo =  rs.getString(4);
+				Long tipoProducto = rs.getLong(5);//tipo_producto
 				
 				producto = new Producto(id, descripcion, precio, codigo);
+				producto.setTipoProducto(tipoProducto);
 				productos.add(producto);
 			}
 			conection.close();
