@@ -1,11 +1,12 @@
 package ar.com.educacionit.domain;
 
-public class Producto {
+public class Producto implements Comparable<Producto> {
 
 	private Long id;
 	private String descripcion;
 	private Float precio;
 	private String codigo;
+	private Long tipoProducto;/// 1 electrodomestico; 2 computacion; etc
 	
 	public Producto(Long id, String descripcion, Float precio, String codigo) {
 		this.id = id;
@@ -57,5 +58,19 @@ public class Producto {
 		return "Producto [id=" + id + ", descripcion=" + descripcion + ", precio=" + precio + ", codigo=" + codigo
 				+ "]";
 	}
+
+	@Override
+	public int compareTo(Producto p) {
+		return this.getPrecio().compareTo(p.getPrecio());
+	}
+
+	public Long getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public void setTipoProducto(Long tipoProducto) {
+		this.tipoProducto = tipoProducto;
+	}
+	
 	
 }
