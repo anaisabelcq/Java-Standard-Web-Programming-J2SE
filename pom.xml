@@ -18,5 +18,6 @@
     <module>services</module>
     <module>dao</module>
     <module>ui</module>
+    <module>webapp</module>
   </modules>
 </project>
