@@ -1,36 +1,47 @@
+<%@page import="ar.com.educacionit.domain.Producto"%>
 <%@page import="java.util.List"%>
 <html>
 
 <head>
-<!-- CSS only -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-	crossorigin="anonymous">
+	<%@include file="header.jsp" %>
 </head>
 
 <body>
-
+<%@include file="navbar.jsp" %>
 <div class="container">
-	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">Nombre</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				List<String> nombres = (List<String>)request.getAttribute("nombres");
-			%>
-			
-			<% for(String nombre : nombres) {%>
+	<div class="row">
+		<table class="table">
+			<thead>
 				<tr>
-					<th scope="row"><%out.print(nombre);%></th>
+					<th scope="col">ID</th>
+					<th scope="col">DESCRIPCIÓN</th>
+					<th scope="col">PRECIO</th>
+					<th scope="col">CODIGO</th>
+					<th scope="col"></th>
 				</tr>
-			<%} %>
-			
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<%
+					List<Producto> productos = (List<Producto>)session.getAttribute("productos");
+				%>
+				
+				<% for(Producto producto : productos) {%>
+					<tr>
+						<th scope="row"><%out.print(producto.getId());%></th>
+						<th scope="row"><%out.print(producto.getDescripcion());%></th>
+						<th scope="row"><%out.print(producto.getPrecio());%></th>
+						<th scope="row"><%out.print(producto.getCodigo());%></th>
+						<th>
+							<button type="button" class="btn btn-outline-primary">Editar</button>
+							<button type="button" class="btn btn-outline-secondary">Eliminar</button>
+						</th>
+					</tr>
+				<%} %>
+				<tr>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
 
 </body>
