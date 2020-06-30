@@ -14,7 +14,7 @@ public class AdministradorDeConexiones {
 	    	
 	    	// Establece la url y base de datos a utilizar
 	        //String dbConnString = "jdbc:mysql://localhost/jseweb";
-	        String dbConnString = "jdbc:mysql://localhost:3306/jseweb?serverTimezone=UTC";
+	        String dbConnString = "jdbc:mysql://localhost:3306/jseweb2?serverTimezone=UTC";
 	    	
 	    	// Establece el usuario de la base de datos
 	        String dbUser = "root";
