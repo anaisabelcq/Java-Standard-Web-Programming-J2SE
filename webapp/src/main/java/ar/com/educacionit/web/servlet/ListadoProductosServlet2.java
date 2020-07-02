@@ -1,6 +1,7 @@
 package ar.com.educacionit.web.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,8 +21,8 @@ import ar.com.educacionit.services.ProductoServicesImpl;
  * @author CX PC
  *
  */
-@WebServlet(urlPatterns = "/listado")
-public class ListadoProductosServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/listado2")
+public class ListadoProductosServlet2 extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,32 +33,26 @@ public class ListadoProductosServlet extends HttpServlet {
 			
 			Collection<Producto> productos = ps.findProductos();
 			
-			req.getSession().setAttribute("productos", productos);
+			//for each
+			productos.forEach(producto -> System.out.println(producto.getCodigo()));
 			
-			//necesito el total
-			Float precioTotal =
-					productos.stream()
-					.map(p->p.getPrecio())
-					.reduce(0f, Float::sum );
-			
-			req.setAttribute("total", precioTotal);
-			
-			//lista de producros con precio >= 25500
-			// pipile de operaciones
-			List<Producto> pf = productos.stream()
-					.filter(p-> p.getPrecio() >= 25500)
+			//map
+			List<Float> totalList = productos.stream()
+					.map(x -> x.getPrecio())
 					.collect(Collectors.toList());
 			
-			req.getSession().setAttribute("productosFiltrados", pf);
+			//reduce
+			Float precioTotal = totalList.stream().reduce(0f, Float::sum );
 			
-			//necesito el total
-			Float precioTotalFiltrados =
-					pf.stream()
-					.map(p->p.getPrecio())
-					.reduce(0f, Float::sum );
+			List<Producto> productosFiltrados = productos.stream()
+				.peek(x -> System.out.print("ids sin filtrar" + x.getId()))
+				.filter(x-> x.getPrecio() > 1500F)
+				.peek(x -> System.out.print("ids luego filtrar" + x.getId()))
+				.collect(Collectors.toList());
 			
-			req.getSession().setAttribute("totalProductosFiltrados", precioTotalFiltrados);
+			req.getSession().setAttribute("productos", ps.findProductos());
 		}catch (Exception e) {
+			// TODO: handle exception
 		}
 		
 		//redireccion req + resp

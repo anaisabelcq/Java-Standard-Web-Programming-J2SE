@@ -15,6 +15,7 @@ import ar.com.educacionit.domain.Producto;
 import ar.com.educacionit.services.ProductoServices;
 import ar.com.educacionit.services.ProductoServicesImpl;
 import ar.com.educacionit.services.exceptions.ServiceException;
+import ar.com.educacionit.web.servlet.parser.CSVFileParse;
 import ar.com.educacionit.web.servlet.parser.FileParser;
 
 @WebServlet(urlPatterns = "/parseArchivoServlet")
@@ -27,10 +28,10 @@ public class ParseArchivoServlet extends HttpServlet {
 		String filePath = getServletContext().getRealPath("nuevos-productos.csv");
 		
 		//creamos el parser
-		FileParser fileParser = new FileParser(filePath);
+		FileParser<List<Producto>> fileParser = new CSVFileParse(filePath);
 		
 		//dado el file, obtenemos la lisa de productos como objetos
-		List<Producto> productos = fileParser.parseArchivo();
+		List<Producto> productos = fileParser.parsearArchivo();
 		
 		//grabar los productos
 		ProductoServices ps = new ProductoServicesImpl();

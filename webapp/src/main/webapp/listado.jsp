@@ -38,6 +38,40 @@
 					</tr>
 				<%} %>
 				<tr>
+					<th>Total</th>
+					<th></th>
+					<th scope="row"><%=request.getAttribute("total")%></th>
+					<th></th>
+				</tr>
+				<tr>
+				</tr>
+			</tbody>
+			
+			<tbody>
+				<%
+					//precio >= 25500
+					List<Producto> productosFiltrados = (List<Producto>)session.getAttribute("productosFiltrados");
+				%>
+				
+				<% for(Producto producto : productosFiltrados) {%>
+					<tr>
+						<th scope="row"><%out.print(producto.getId());%></th>
+						<th scope="row"><%out.print(producto.getDescripcion());%></th>
+						<th scope="row"><%out.print(producto.getPrecio());%></th>
+						<th scope="row"><%out.print(producto.getCodigo());%></th>
+						<th>
+							<button type="button" class="btn btn-outline-primary">Editar</button>
+							<button type="button" class="btn btn-outline-secondary">Eliminar</button>
+						</th>
+					</tr>
+				<%} %>
+				<tr>
+					<th>Total</th>
+					<th></th>
+					<th scope="row"><%=session.getAttribute("totalProductosFiltrados")%></th>
+					<th></th>
+				</tr>
+				<tr>
 				</tr>
 			</tbody>
 		</table>
